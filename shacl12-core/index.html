@@ -5955,9 +5955,31 @@ ex:Concept2
 					multiple <a>values</a>, but should only have one <a>value</a> per language tag.
 				</p>
 				<p>
-					Note that <code>sh:name</code> and <code>sh:description</code> should NOT be used for <a>node shapes</a>.
-					For those, the properties <code>rdfs:label</code> and <code>rdfs:comment</code> are well-established
-					and already used for class definitions.
+					For <a>node shapes</a> that coincide with a class via an
+					<a href="#implicit-targetClass">implicit class target</a>
+					(that is, the node shape and the class share the same IRI), <code>sh:name</code> and
+					<code>sh:description</code> are typically not needed, because <code>rdfs:label</code> and
+					<code>rdfs:comment</code> are well-established and already used for class definitions.
+					These use cases are unaffected by the rest of this section.
+				</p>
+				<p>
+					However, when a node shape declares a <code>sh:targetClass</code> whose IRI is distinct
+					from the node shape's own IRI &mdash; for example when an application profile defines
+					shapes for classes maintained by a different organization &mdash; <code>rdfs:label</code>
+					and <code>rdfs:comment</code> on the node shape are ambiguous: they could describe the
+					node shape itself, or the target class in the context of this shape. In such cases,
+					<code>sh:name</code> and <code>sh:description</code> may be used on the node shape to
+					unambiguously name or describe its <code>sh:targetClass</code> in the context of the
+					surrounding shape, analogous to their established use on property shapes. If present,
+					tools should prefer these locally specified names and descriptions over labels declared
+					globally on the target class itself.
+				</p>
+				<p>
+					This document does not define the meaning of <code>sh:name</code> or
+					<code>sh:description</code> on node shapes whose targets are declared only via
+					<code>sh:targetSubjectsOf</code>, <code>sh:targetObjectsOf</code>, a SPARQL-based target,
+					or a combination of multiple targets. Implementations may assign a meaning to their use
+					in such cases, but this is not currently standardized.
 				</p>
 			</section>
 			<section id="intent">
