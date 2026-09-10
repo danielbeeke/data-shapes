@@ -5935,17 +5935,22 @@ ex:Concept2
 			<section id="name">
 				<h3>sh:name and sh:description</h3>
 				<p>
-					Property shapes may have one or more <a>values</a> for <code>sh:name</code>
-					to provide human-readable labels for the property in the target where it appears.
+					Shapes may have one or more <a>values</a> for <code>sh:name</code>
+					to provide human-readable labels for the property or the class in the target where it appears.
+					</p>
+				<p class="syntax">
+					In case of an <a href="#implicit-targetClass">implicit class target</a> <code>sh:name</code> MUST NOT be used on the <code>rdfs:Class</code>.
+				</p>
+				<p>
 					If present, tools should prefer such locally specified labels
-					over globally specified labels at the <code>rdf:Property</code> itself.
+					over globally specified labels at the <code>rdf:Property</code> or the <code>rdfs:Class</code> itself.
 					For example, if a form displays a node that is in the target of a given property shape
 					with an <code>sh:name</code>, then the tool should use the provided name.
 					The <a>values</a> of <code>sh:name</code> must be <a>literals</a> with <a>datatype</a>
 					<code>xsd:string</code>, <code>rdf:dirLangString</code>, or <code>rdf:langString</code>.
 				</p>
 				<p>
-					Similarly, property shapes may have values for <code id="description">sh:description</code>
+					Similarly, shapes may have values for <code id="description">sh:description</code>
 					to provide descriptions of the property in the given context.
 					The <a>values</a> of <code>sh:description</code> must be <a>literals</a> with <a>datatype</a>
 					<code>xsd:string</code>, <code>rdf:dirLangString</code>, <code>rdf:langString</code>, or <code>rdf:HTML</code>.
@@ -5953,33 +5958,6 @@ ex:Concept2
 				<p>
 					Both <code>sh:name</code> and <code>sh:description</code> may have
 					multiple <a>values</a>, but should only have one <a>value</a> per language tag.
-				</p>
-				<p>
-					For <a>node shapes</a> that coincide with a class via an
-					<a href="#implicit-targetClass">implicit class target</a>
-					(that is, the node shape and the class share the same IRI), <code>sh:name</code> and
-					<code>sh:description</code> are typically not needed, because <code>rdfs:label</code> and
-					<code>rdfs:comment</code> are well-established and already used for class definitions.
-					These use cases are unaffected by the rest of this section.
-				</p>
-				<p>
-					However, when a node shape declares a <code>sh:targetClass</code> whose IRI is distinct
-					from the node shape's own IRI &mdash; for example when an application profile defines
-					shapes for classes maintained by a different organization &mdash; <code>rdfs:label</code>
-					and <code>rdfs:comment</code> on the node shape are ambiguous: they could describe the
-					node shape itself, or the target class in the context of this shape. In such cases,
-					<code>sh:name</code> and <code>sh:description</code> may be used on the node shape to
-					unambiguously name or describe its <code>sh:targetClass</code> in the context of the
-					surrounding shape, analogous to their established use on property shapes. If present,
-					tools should prefer these locally specified names and descriptions over labels declared
-					globally on the target class itself.
-				</p>
-				<p>
-					This document does not define the meaning of <code>sh:name</code> or
-					<code>sh:description</code> on node shapes whose targets are declared only via
-					<code>sh:targetSubjectsOf</code>, <code>sh:targetObjectsOf</code>, a SPARQL-based target,
-					or a combination of multiple targets. Implementations may assign a meaning to their use
-					in such cases, but this is not currently standardized.
 				</p>
 			</section>
 			<section id="intent">
